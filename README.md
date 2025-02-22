@@ -89,4 +89,6 @@ You can combine multiple options:
   - typer: For CLI interface
   - plotext: For terminal-based plotting
 
+![NetChart Demo](images/demo.png)
+
 
