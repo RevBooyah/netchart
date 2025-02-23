@@ -4,10 +4,13 @@ A real-time network traffic monitoring tool that displays network interface stat
 - Left panel (75%): Real-time line chart showing upload and download speeds
 - Right panel (25%): Network statistics summary and interface details
 
+![NetChart Demo](images/demo.png)
+
 ## Features
 
 - Real-time monitoring of network traffic (send/receive) for all network interfaces
 - Auto-scaling line chart with configurable history length
+- Dark and light themes
 - Detailed statistics panel showing:
   - Total data transferred
   - Peak throughput rates
@@ -70,9 +73,14 @@ The following options are available:
   ./netchart.py --no-auto-scale  # Disable auto-scaling
   ```
 
+- `--dark/--light`: Use dark or light theme (default: light)
+  ```bash
+  ./netchart.py --dark  # Use dark theme
+  ```
+
 You can combine multiple options:
 ```bash
-./netchart.py -i 0.5 --history 180 --no-stats  # Fast updates, longer history, no stats panel
+./netchart.py -i 0.5 --history 180 --no-stats --dark  # Fast updates, longer history, no stats, dark theme
 ```
 
 ## Controls
@@ -88,7 +96,5 @@ You can combine multiple options:
   - psutil: For network statistics
   - typer: For CLI interface
   - plotext: For terminal-based plotting
-
-![NetChart Demo](images/demo.png)
 
 

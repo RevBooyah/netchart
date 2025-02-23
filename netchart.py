@@ -172,7 +172,7 @@ def create_stats_display(width: int, height: int) -> List[str]:
     
     return lines
 
-def plot_network_traffic(show_stats: bool = True, auto_scale: bool = True, history_size: int = 60):
+def plot_network_traffic(show_stats: bool = True, auto_scale: bool = True, history_size: int = 60, dark_mode: bool = False):
     """Plot network traffic for all interfaces."""
     width, height = get_terminal_size()
     
@@ -184,6 +184,12 @@ def plot_network_traffic(show_stats: bool = True, auto_scale: bool = True, histo
     plt.clear_data()
     plt.clear_figure()
     plt.plotsize(chart_width, height)
+    
+    # Set theme
+    if dark_mode:
+        plt.theme('dark')
+    else:
+        plt.theme('default')
     
     colors = ['red', 'blue', 'green', 'yellow', 'magenta', 'cyan']
     color_idx = 0
@@ -239,6 +245,7 @@ def main(
     history: int = typer.Option(60, "--history", "-h", help="Number of data points to keep in history"),
     show_stats: bool = typer.Option(True, "--stats/--no-stats", help="Show/hide statistics panel"),
     auto_scale: bool = typer.Option(True, "--auto-scale/--no-auto-scale", help="Auto-scale y-axis"),
+    dark_mode: bool = typer.Option(False, "--dark/--light", help="Use dark or light theme"),
 ):
     """Network traffic monitor with real-time charts."""
     # Clear screen once at the start and hide cursor
@@ -248,7 +255,7 @@ def main(
         while True:
             current_stats = get_network_stats()
             update_data(current_stats, previous_stats, history)
-            plot_network_traffic(show_stats, auto_scale, history)
+            plot_network_traffic(show_stats, auto_scale, history, dark_mode)
             previous_stats = current_stats
             sleep(interval)
     except KeyboardInterrupt:
